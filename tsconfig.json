@@ -14,10 +14,10 @@
     "rootDir": "./",
     "moduleResolution": "node",
     "paths": {
-      "@/*": ["./client/*"],
-      "@components": ["./client/components"],
-      "@pages": ["./client/pages"],
-      "@utils": ["./client/utils"]
+      "@/*": ["./src/*"],
+      "@components": ["./src/components"],
+      "@pages": ["./src/pages"],
+      "@utils": ["./src/utils"]
     },
     "resolveJsonModule": true,
     "allowArbitraryExtensions": true,
@@ -36,6 +36,7 @@
     "noImplicitReturns": true,
     "skipLibCheck": true
   },
-  "include": ["client", "types.d.ts", "server"],
-  "exclude": ["node_modules", "dist", "scripts", "client/assets/*"]
+  "extends": "./src/.umi/tsconfig.json",
+  "include": ["src", "types.d.ts", "server"],
+  "exclude": ["node_modules", "dist", "scripts", "src/assets/*"]
 }
