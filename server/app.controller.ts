@@ -1,12 +1,22 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get('/api/chat')
+  @Post('/api/chat')
   getHello(): any {
     return this.appService.getHello();
+  }
+
+  @Post('/api/vector/set')
+  setVector(): any {
+    return this.appService.setVector();
+  }
+
+  @Post('/api/vector/get')
+  getVector(@Body() body: Record<string, any>): any {
+    return this.appService.getVector(body.search);
   }
 }
