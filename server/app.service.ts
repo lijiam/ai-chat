@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import OpenAI from 'openai';
-// import { ChromaClient, DefaultEmbeddingFunction } from 'chromadb';
 import { Chroma } from '@langchain/community/vectorstores/chroma';
 import { AlibabaTongyiEmbeddings } from '@langchain/community/embeddings/alibaba_tongyi';
-// import { JSONLoader } from 'langchain/document_loaders/fs/json';
-import { PDFLoader } from '@langchain/community/document_loaders/fs/pdf';
+import { JSONLoader } from 'langchain/document_loaders/fs/json';
+// import { PDFLoader } from '@langchain/community/document_loaders/fs/pdf';
 import path from 'path';
 
 @Injectable()
@@ -22,20 +21,21 @@ export class AppService {
 
   async init() {
     // JSON 文件加载器
-    // const loader = new JSONLoader(
-    //   path.resolve(__dirname, '../../', './document_loaders/init.json'),
-    //   ['/questions', '/answers'],
-    // );
-    // const docs = await loader.load();
-
-    const loader = new PDFLoader(
-      path.resolve(
-        __dirname,
-        '../../',
-        './document_loaders/魔数产品白皮书.pdf',
-      ),
+    const loader = new JSONLoader(
+      path.resolve(__dirname, '../../', './document_loaders/init.json'),
+      ['/questions', '/answers'],
     );
     const docs = await loader.load();
+
+    // PDF 文件加载器
+    // const loader = new PDFLoader(
+    //   path.resolve(
+    //     __dirname,
+    //     '../../',
+    //     './document_loaders/魔数产品白皮书.pdf',
+    //   ),
+    // );
+    // const docs = await loader.load();
 
     this.vectorStore = await Chroma.fromDocuments(
       docs,
