@@ -5,6 +5,11 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  @Post('/api/columns')
+  getColumns(): any {
+    return this.appService.getColumns();
+  }
+
   @Post('/api/chat')
   getHello(): any {
     return this.appService.getHello();
@@ -17,6 +22,6 @@ export class AppController {
 
   @Post('/api/vector/get')
   getVector(@Body() body: Record<string, any>): any {
-    return this.appService.getVector(body.search);
+    return this.appService.getVector(body);
   }
 }
